@@ -55,12 +55,26 @@ public class CarController : MonoBehaviour
     {
         car.Drivetrain.SetInput(_carInputData);
 
-        if (_carInputData.shiftUp)
+        if (_carInputData.shiftUp) //임시
+        {
+            // 현재 속도와 기어비를 고려하여 RPM 업데이트
+            float prevSpeed = car.Velocity; // 차량의 현재 속도
+            float prevRPM = car.Drivetrain.Engine.CurrentRPM;
+            float prevGearRatio = car.Drivetrain.Transmission.CurrentGearRatio;
+
+            // 기어 업
             car.Drivetrain.Transmission.ShiftUp();
+            float newGearRatio = car.Drivetrain.Transmission.CurrentGearRatio;
+            float newSpeed = prevSpeed * (prevGearRatio / newGearRatio);
+            float newRPM = prevRPM * (newGearRatio / prevGearRatio);
+
+            // 엔진 RPM 업데이트
+            car.Drivetrain.Engine.UpdateRPM(newRPM);
+        }
         else if (_carInputData.shiftDown)
             car.Drivetrain.Transmission.ShiftDown();
 
-            _carInputData.shiftUp = false;
+        _carInputData.shiftUp = false;
         _carInputData.shiftDown = false;
     }
 }

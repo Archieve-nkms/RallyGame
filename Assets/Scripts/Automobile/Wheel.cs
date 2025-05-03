@@ -25,7 +25,7 @@ public class Wheel : MonoBehaviour
     }
     public void ApplySteering(float steerInput)
     {
-        float steerSpeed = 0.4f;
+        float steerSpeed = 0.8f;
         float returnSpeedFactor = 10f;
 
         if (steerInput != 0)
