@@ -13,7 +13,7 @@ public class Transmission : MonoBehaviour
     public List<float> gearRatios;
     public float finalDrive;
     
-    int _currentGear;
+    int _currentGear = 1;
 
     public int CurrentGear => _currentGear;
     public float CurrentGearRatio => gearRatios[_currentGear];

@@ -5,6 +5,8 @@ public class CameraController : MonoBehaviour
     [Header("Setting")]
     [SerializeField]
     float _followSpeed = 7f;
+    [SerializeField]
+    float _rotationSpeed = 2f;
 
     [SerializeField]
     Transform _follow;
@@ -18,9 +20,8 @@ public class CameraController : MonoBehaviour
 
     void FollowTarget(float delta)
     {
-        float speed = delta * _followSpeed;
-        Vector3 targetPosition = Vector3.Lerp(transform.position, _follow.position, speed);
-        Quaternion targetRotation = Quaternion.Lerp(transform.rotation, _follow.rotation, speed);
+        Vector3 targetPosition = Vector3.Lerp(transform.position, _follow.position, delta * _followSpeed);
+        Quaternion targetRotation = Quaternion.Lerp(transform.rotation, _follow.rotation, delta * _rotationSpeed);
         targetRotation = new Quaternion(0, targetRotation.y, 0, targetRotation.w);
         transform.position = targetPosition;
         transform.rotation = targetRotation;
