@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
     {
         float delta = Time.fixedDeltaTime;
 
-        if(_follow != null )
+        if(_follow != null)
             FollowTarget(delta);
 
         HandleCameraCollision(delta);
