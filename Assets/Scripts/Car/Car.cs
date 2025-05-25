@@ -27,4 +27,14 @@ public class Car : MonoBehaviour
         _acceleration = (Velocity - _lastTickVelocity) / Time.fixedDeltaTime;
         _lastTickVelocity = Velocity;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            GameManager.Instance.FinishRace();
+            if(GetComponent<CarReplayPlayer>().IsPlaying)
+                GetComponent<CarReplayPlayer>().StopPlayback();
+        }
+    }
 }

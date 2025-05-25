@@ -1,3 +1,4 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -53,16 +54,18 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.GameState != GameState.Race)
+            return;
+
+        GameManager.Instance.replayRecorder.RecordInput(GameManager.Instance.ElapsedTime, car, _carInputData);
         car.Drivetrain.SetInput(_carInputData);
 
         if (_carInputData.shiftUp) //임시
         {
-            // 현재 속도와 기어비를 고려하여 RPM 업데이트
-            float prevSpeed = car.Velocity; // 차량의 현재 속도
+            float prevSpeed = car.Velocity;
             float prevRPM = car.Drivetrain.Engine.CurrentRPM;
             float prevGearRatio = car.Drivetrain.Transmission.CurrentGearRatio;
 
-            // 기어 업
             car.Drivetrain.Transmission.ShiftUp();
             float newGearRatio = car.Drivetrain.Transmission.CurrentGearRatio;
             if(newGearRatio != 0)

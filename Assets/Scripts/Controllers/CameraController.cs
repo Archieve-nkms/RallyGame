@@ -11,8 +11,7 @@ public class CameraController : MonoBehaviour
     float _cameraCollisionOffset = 0.2f;
     float _minCollisionOffset = 0.2f;
 
-    [SerializeField]
-    Transform _follow;
+    public Transform follow;
 
     [SerializeField]
     LayerMask _collisionMask;
@@ -33,7 +32,7 @@ public class CameraController : MonoBehaviour
     {
         float delta = Time.fixedDeltaTime;
 
-        if(_follow != null)
+        if(follow != null)
             FollowTarget(delta);
 
         HandleCameraCollision(delta);
@@ -41,8 +40,8 @@ public class CameraController : MonoBehaviour
 
     void FollowTarget(float delta)
     {
-        Vector3 targetPosition = Vector3.Lerp(transform.position, _follow.position, delta * _followSpeed);
-        Quaternion targetRotation = Quaternion.Lerp(transform.rotation, _follow.rotation, delta * _rotationSpeed);
+        Vector3 targetPosition = Vector3.Lerp(transform.position, follow.position, delta * _followSpeed);
+        Quaternion targetRotation = Quaternion.Lerp(transform.rotation, follow.rotation, delta * _rotationSpeed);
         targetRotation = new Quaternion(0, targetRotation.y, 0, targetRotation.w);
         transform.position = targetPosition;
         transform.rotation = targetRotation;
