@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class ResultPopup : BasePopupUI
 {
@@ -21,6 +22,11 @@ public class ResultPopup : BasePopupUI
         GameManager.Instance.Init();
         GameManager.Instance.GameUI.BeginCountdown(5, GameState.Replay);
         gameObject.SetActive(false);
+    }
+
+    public void OnMainmenuButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void UpdateLeaderboard(List<string> leaderboard)

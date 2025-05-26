@@ -59,8 +59,29 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SetUpEnvironments();
         Init();
         GameUI.BeginCountdown(5, GameState.Race);
+    }
+
+    public void SetUpEnvironments()
+    {
+        if (GameSettings.SelectedWeather == "Clear")
+        {
+            RenderSettings.fogDensity = 0f;
+            GameObject.Find("Rain").SetActive(false);
+        }
+        else if (GameSettings.SelectedWeather == "Fog")
+        {
+            RenderSettings.fogDensity = 0.1f;
+            GameObject.Find("Rain").SetActive(false);
+        }
+        else if(GameSettings.SelectedWeather == "Rain")
+        {
+            RenderSettings.fogDensity = 0f;
+            GameObject.Find("Rain").SetActive(true);
+        }
+
     }
 
     public void Init()
@@ -75,7 +96,7 @@ public class GameManager : MonoBehaviour
         if(prev != null)
             Destroy(prev.gameObject);
 
-        GameObject go = GameObject.Instantiate(Resources.Load($"Prefabs/Car/{GameSettings.SelectedVehicle}"), pos, rot) as GameObject;
+        GameObject go = GameObject.Instantiate(Resources.Load($"Prefabs/Car/{GameSettings.SelectedVehicle}_{GameSettings.SelectedDriveType}"), pos, rot) as GameObject;
         CameraController cameraController = FindAnyObjectByType<CameraController>();
         cameraController.follow = go.transform;
         carController.car = go.GetComponent<Car>();

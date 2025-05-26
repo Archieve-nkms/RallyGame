@@ -353,7 +353,7 @@ MonoBehaviour:
     - m_Text: RWD
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: AWD
+    - m_Text: 4WD
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:

@@ -37,7 +37,7 @@ public class CarRespawner : MonoBehaviour
 
         for (float t = 0f; t <= 1f; t += 0.01f)
         {
-            Vector3 splinePos = spline.EvaluatePosition(t);
+            Vector3 splinePos = spline.EvaluatePosition(0, t);
             float dist = Vector3.Distance(currentPosition, splinePos);
             if (dist < closestDistance)
             {
